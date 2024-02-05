@@ -34,7 +34,7 @@ import components.map.MapSecondary;
  *          (pf)
  * </pre>
  *
- * @author Put your name here
+ * @author Layan Abdallah & Oak Hodous
  *
  */
 public class Map4<K, V> extends MapSecondary<K, V> {
@@ -75,10 +75,14 @@ public class Map4<K, V> extends MapSecondary<K, V> {
     private static int mod(int a, int b) {
         assert b > 0 : "Violation of: b > 0";
 
-        // TODO - fill in body
+        int mod = a % b;
+        if (mod < 0) {
+            mod += b;
+        }
+        return mod;
 
-        // This line added just to make the component compilable.
-        return 0;
+        //layan
+
     }
 
     /**
@@ -104,7 +108,9 @@ public class Map4<K, V> extends MapSecondary<K, V> {
          */
         this.hashTable = new Map[hashTableSize];
 
-        // TODO - fill in rest of body
+        // TODO - fill in body
+
+        //oak
 
     }
 
@@ -117,7 +123,9 @@ public class Map4<K, V> extends MapSecondary<K, V> {
      */
     public Map4() {
 
-        // TODO - fill in body
+        this.createNewRep(DEFAULT_HASH_TABLE_SIZE);
+
+        //layan
 
     }
 
@@ -130,8 +138,11 @@ public class Map4<K, V> extends MapSecondary<K, V> {
      * @ensures this = {}
      */
     public Map4(int hashTableSize) {
+        assert hashTableSize > 0 : "Violation of: hashTableSize > 0";
 
-        // TODO - fill in body
+        this.createNewRep(hashTableSize);
+
+        //layan
 
     }
 
@@ -184,6 +195,8 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         // TODO - fill in body
 
+        //oak
+
     }
 
     @Override
@@ -195,6 +208,8 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         // This line added just to make the component compilable.
         return null;
+
+        //oak
     }
 
     @Override
@@ -205,6 +220,8 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         // This line added just to make the component compilable.
         return null;
+
+        //oak
     }
 
     @Override
@@ -212,29 +229,28 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
+        int index = mod(key.hashCode(), this.hashTable.length);
+        return this.hashTable[index].value(key);
 
-        // This line added just to make the component compilable.
-        return null;
+        //layan
     }
 
     @Override
     public final boolean hasKey(K key) {
         assert key != null : "Violation of: key is not null";
 
-        // TODO - fill in body
+        int index = mod(key.hashCode(), this.hashTable.length);
+        return this.hashTable[index].hasKey(key);
 
-        // This line added just to make the component compilable.
-        return false;
+        //layan
     }
 
     @Override
     public final int size() {
 
-        // TODO - fill in body
+        return this.size;
 
-        // This line added just to make the component compilable.
-        return 0;
+        //layan
     }
 
     @Override
