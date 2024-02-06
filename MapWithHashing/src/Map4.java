@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import components.map.Map;
+import components.map.Map2;
 import components.map.MapSecondary;
 
 /**
@@ -108,7 +109,9 @@ public class Map4<K, V> extends MapSecondary<K, V> {
          */
         this.hashTable = new Map[hashTableSize];
 
-        // TODO - fill in body
+        for(int x = 0; x < hashTableSize; x++) {
+            this.hashTable[x] = new Map2<K, V>();
+        }
 
         //oak
 
@@ -193,9 +196,8 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert value != null : "Violation of: value is not null";
         assert !this.hasKey(key) : "Violation of: key is not in DOMAIN(this)";
 
-        // TODO - fill in body
-
-        //oak
+        int bin = mod(key.hashCode(), this.hashTable.length);
+        this.hashTable[bin].add(key, value);
 
     }
 
@@ -204,10 +206,9 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
+        int bin = mod(key.hashCode(), this.hashTable.length);
+        return this.hashTable[bin].remove(key);
 
-        // This line added just to make the component compilable.
-        return null;
 
         //oak
     }
@@ -216,10 +217,21 @@ public class Map4<K, V> extends MapSecondary<K, V> {
     public final Pair<K, V> removeAny() {
         assert this.size() > 0 : "Violation of: this /= empty_set";
 
-        // TODO - fill in body
+        Pair<K,V> value;
+        boolean valueFound = false;
+        int bin = 0;
+        while(!valueFound) {
+            if(hashTable[bin].size() > 0) {
+                value = hashTable[bin].removeAny();
+                valueFound = true;
+            }
+            else {
+                bin += 1;
+            }
+        }
 
         // This line added just to make the component compilable.
-        return null;
+        return value;
 
         //oak
     }
