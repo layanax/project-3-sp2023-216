@@ -109,9 +109,10 @@ public class Map4<K, V> extends MapSecondary<K, V> {
          */
         this.hashTable = new Map[hashTableSize];
 
-        for(int x = 0; x < hashTableSize; x++) {
+        for (int x = 0; x < hashTableSize; x++) {
             this.hashTable[x] = new Map2<K, V>();
         }
+        this.size = 0;
 
         //oak
 
@@ -198,6 +199,7 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         int bin = mod(key.hashCode(), this.hashTable.length);
         this.hashTable[bin].add(key, value);
+        this.size += 1;
 
     }
 
@@ -207,8 +209,8 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
         int bin = mod(key.hashCode(), this.hashTable.length);
+        this.size -= 1;
         return this.hashTable[bin].remove(key);
-
 
         //oak
     }
@@ -217,19 +219,18 @@ public class Map4<K, V> extends MapSecondary<K, V> {
     public final Pair<K, V> removeAny() {
         assert this.size() > 0 : "Violation of: this /= empty_set";
 
-        Pair<K,V> value;
+        Pair<K, V> value;
         boolean valueFound = false;
         int bin = 0;
-        while(!valueFound) {
-            if(hashTable[bin].size() > 0) {
-                value = hashTable[bin].removeAny();
+        while (!valueFound) {
+            if (this.hashTable[bin].size() > 0) {
+                value = this.hashTable[bin].removeAny();
                 valueFound = true;
-            }
-            else {
+            } else {
                 bin += 1;
             }
         }
-
+        this.size -= 1;
         // This line added just to make the component compilable.
         return value;
 
