@@ -107,6 +107,7 @@ public class Map4<K, V> extends MapSecondary<K, V> {
          * compile; as shown, it results in a warning about an unchecked
          * conversion, though it cannot fail.
          */
+
         this.hashTable = new Map[hashTableSize];
 
         for (int x = 0; x < hashTableSize; x++) {
@@ -199,7 +200,7 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         int bin = mod(key.hashCode(), this.hashTable.length);
         this.hashTable[bin].add(key, value);
-        this.size += 1;
+        this.size++;
 
     }
 
@@ -209,7 +210,7 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
         int bin = mod(key.hashCode(), this.hashTable.length);
-        this.size -= 1;
+        this.size--;
         return this.hashTable[bin].remove(key);
 
         //oak
@@ -227,10 +228,10 @@ public class Map4<K, V> extends MapSecondary<K, V> {
                 value = this.hashTable[bin].removeAny();
                 valueFound = true;
             } else {
-                bin += 1;
+                bin++;
             }
         }
-        this.size -= 1;
+        this.size--;
         // This line added just to make the component compilable.
         return value;
 
