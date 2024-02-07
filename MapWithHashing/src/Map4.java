@@ -202,6 +202,8 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         this.hashTable[bin].add(key, value);
         this.size++;
 
+        //oak
+
     }
 
     @Override
@@ -223,16 +225,16 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         Pair<K, V> value;
         boolean valueFound = false;
         int bin = 0;
-        while (!valueFound) {
+
+        while (!valueFound && bin < this.hashTable.length) {
             if (this.hashTable[bin].size() > 0) {
                 value = this.hashTable[bin].removeAny();
                 valueFound = true;
-            } else {
-                bin++;
             }
+            bin++;
         }
+
         this.size--;
-        // This line added just to make the component compilable.
         return value;
 
         //oak

@@ -1,4 +1,11 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
 import components.map.Map;
+import components.map.Map.Pair;
 
 /**
  * JUnit test fixture for {@code Map<String, String>}'s constructor and kernel
@@ -79,5 +86,51 @@ public abstract class MapTest {
 
     // TODO - add test cases for constructor, add, remove, removeAny, value,
     // hasKey, and size
+    @Test
+    public void testRemoveAny() {
+        Map<String, String> testMap = this.constructorTest();
+        testMap.add("one", "1");
+        assertNotNull(testMap.removeAny());
+        assertFalse(testMap.hasKey("one"));
+    }
+
+    @Test
+    public void testAdd() {
+        Map<String, String> testMap = this.constructorTest();
+        Map<String, String> refMap = this.constructorRef();
+
+        testMap.add("k1", "v1");
+        refMap.add("k1", "v1");
+
+        assertEquals(refMap, testMap);
+    }
+
+    @Test
+    public void testRemove() {
+        Map<String, String> testMap = this.constructorTest();
+        Map<String, String> refMap = this.constructorRef();
+
+        testMap.add("k1", "v1");
+        testMap.add("k2", "v2");
+        refMap.add("k1", "v1");
+        refMap.add("k2", "v2");
+
+        testMap.remove("k1");
+        refMap.remove("k1");
+
+        assertEquals(refMap, testMap);
+    }
+
+    @Test
+    public void testRemoveToEmpty() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        Map<String, String> mExpected = this.createFromArgsTest("red", "one");
+
+        Pair<String, String> p = m.remove("red");
+        Pair<String, String> pExpected = mExpected.remove("red");
+
+        assertEquals(pExpected, p);
+        assertEquals(mExpected, m);
+    }
 
 }
