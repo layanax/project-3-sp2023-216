@@ -86,27 +86,31 @@ public abstract class MapTest {
 
     // TODO - add test cases for constructor, add, remove, removeAny, value,
     // hasKey, and size
+
     /**
      * Test removing key-value pair and checks if key is removed from map.
      */
     @Test
-    public void testRemoveAnyAndCheckRemovedKey() {
-        Map<String, String> testMap = this.constructorTest();
-        testMap.add("one", "1");
-        assertNotNull(testMap.removeAny());
-        assertFalse(testMap.hasKey("one"));
+    public void removeAnyTest() {
+        Map<String, String> testMap = this.createFromArgsTest("one", "1");
+        Map<String, String> refMap = this.createFromArgsRef("one", "1");
+
+        Pair<String, String> removedPair = testMap.removeAny();
+
+        assertNotNull(removedPair);
+        assertFalse(testMap.hasKey(removedPair.key()));
+        assertEquals(refMap, testMap);
     }
 
     /**
      * Test adding key-value pair and checks if map equals reference map.
      */
     @Test
-    public void testAddAndCheckEquality() {
-        Map<String, String> testMap = this.constructorTest();
-        Map<String, String> refMap = this.constructorRef();
+    public void addTest() {
+        Map<String, String> testMap = this.createFromArgsTest();
+        Map<String, String> refMap = this.createFromArgsRef("k1", "v1");
 
         testMap.add("k1", "v1");
-        refMap.add("k1", "v1");
 
         assertEquals(refMap, testMap);
     }
@@ -116,14 +120,11 @@ public abstract class MapTest {
      *
      */
     @Test
-    public void testRemoveAndCheckEquality() {
-        Map<String, String> testMap = this.constructorTest();
-        Map<String, String> refMap = this.constructorRef();
-
-        testMap.add("k1", "v1");
-        testMap.add("k2", "v2");
-        refMap.add("k1", "v1");
-        refMap.add("k2", "v2");
+    public void removeTest() {
+        Map<String, String> testMap = this.createFromArgsTest("k1", "v1", "k2",
+                "v2");
+        Map<String, String> refMap = this.createFromArgsRef("k1", "v1", "k2",
+                "v2");
 
         testMap.remove("k1");
         refMap.remove("k1");
@@ -137,26 +138,28 @@ public abstract class MapTest {
      *
      */
     @Test
-    public void testRemoveToEmptyAndCheckKeyValuePairs() {
-        Map<String, String> m = this.createFromArgsTest("red", "one");
-        Map<String, String> mExpected = this.createFromArgsTest("red", "one");
+    public void removeToEmptyTest() {
+        Map<String, String> testMap = this.createFromArgsTest("red", "one");
+        Map<String, String> refMap = this.createFromArgsRef("red", "one");
 
-        Pair<String, String> p = m.remove("red");
-        Pair<String, String> pExpected = mExpected.remove("red");
+        Pair<String, String> p = testMap.remove("red");
+        Pair<String, String> pExpected = refMap.remove("red");
 
         assertEquals(pExpected, p);
-        assertEquals(mExpected, m);
+        assertEquals(refMap, testMap);
     }
 
     /**
      * Test adding single key-value pair and checks if map equals reference map.
      */
     @Test
-    public final void addOneKeyValuePair() {
-        Map<String, String> test = this.createFromArgsTest();
-        Map<String, String> expect = this.createFromArgsRef("1", "2");
-        test.add("1", "2");
-        assertEquals(expect, test);
+    public final void addOnePairTest() {
+        Map<String, String> testMap = this.createFromArgsTest();
+        Map<String, String> refMap = this.createFromArgsRef("1", "2");
+
+        testMap.add("1", "2");
+
+        assertEquals(refMap, testMap);
     }
 
     /**
@@ -165,11 +168,13 @@ public abstract class MapTest {
      *
      */
     @Test
-    public final void addMultipleKeyValuePairs() {
-        Map<String, String> test = this.createFromArgsTest("1", "2");
-        Map<String, String> expect = this.createFromArgsRef("1", "2", "3", "4");
-        test.add("3", "4");
-        assertEquals(expect, test);
+    public final void addMultiplePairsTest() {
+        Map<String, String> testMap = this.createFromArgsTest("1", "2");
+        Map<String, String> refMap = this.createFromArgsRef("1", "2", "3", "4");
+
+        testMap.add("3", "4");
+
+        assertEquals(refMap, testMap);
     }
 
     /**
@@ -178,11 +183,13 @@ public abstract class MapTest {
      *
      */
     @Test
-    public final void removeKeyValuePair() {
-        Map<String, String> test = this.createFromArgsTest("1", "2");
-        Map<String, String> expect = this.createFromArgsRef();
-        test.remove("1");
-        assertEquals(expect, test);
+    public final void removePairTest() {
+        Map<String, String> testMap = this.createFromArgsTest("1", "2");
+        Map<String, String> refMap = this.createFromArgsRef();
+
+        testMap.remove("1");
+
+        assertEquals(refMap, testMap);
     }
 
     /**
@@ -191,21 +198,26 @@ public abstract class MapTest {
      *
      */
     @Test
-    public final void removeMultipleKeyValuePairs() {
-        Map<String, String> test = this.createFromArgsTest("1", "2", "3", "4");
-        Map<String, String> expect = this.createFromArgsRef("3", "4");
-        test.remove("1");
-        assertEquals(expect, test);
+    public final void removeMultiplePairsTest() {
+        Map<String, String> testMap = this.createFromArgsTest("1", "2", "3",
+                "4");
+        Map<String, String> refMap = this.createFromArgsRef("3", "4");
+
+        testMap.remove("1");
+
+        assertEquals(refMap, testMap);
     }
 
     /**
      * Test removing key-value pair and checks if map equals reference map.
      */
     @Test
-    public final void removeAnyKeyValuePair() {
-        Map<String, String> test = this.createFromArgsTest("1", "2");
-        Map<String, String> expect = this.createFromArgsRef();
-        test.removeAny();
-        assertEquals(expect, test);
+    public final void removeAnyPairTest() {
+        Map<String, String> testMap = this.createFromArgsTest("1", "2");
+        Map<String, String> refMap = this.createFromArgsRef();
+
+        testMap.removeAny();
+
+        assertEquals(refMap, testMap);
     }
 }
