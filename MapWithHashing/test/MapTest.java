@@ -135,9 +135,10 @@ public abstract class MapTest {
      * key-value pairs.
      *
      */
+    @Test
     public void removeToEmptyTest() {
         Map<String, String> testMap = this.createFromArgsTest("red", "one");
-        Map<String, String> refMap = this.createFromArgsRef();
+        Map<String, String> refMap = this.createFromArgsRef("red", "one");
 
         Pair<String, String> p = testMap.remove("red");
 
@@ -147,7 +148,7 @@ public abstract class MapTest {
     }
 
     /**
-     * test the size of a map that hasn't had anything done to it.
+     * Test the size of a map that hasn't had anything done to it.
      */
     @Test
     public void testSize1() {
