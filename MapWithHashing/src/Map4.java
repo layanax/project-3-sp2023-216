@@ -107,7 +107,6 @@ public class Map4<K, V> extends MapSecondary<K, V> {
          * compile; as shown, it results in a warning about an unchecked
          * conversion, though it cannot fail.
          */
-
         this.hashTable = new Map[hashTableSize];
 
         for (int x = 0; x < hashTableSize; x++) {
@@ -200,9 +199,7 @@ public class Map4<K, V> extends MapSecondary<K, V> {
 
         int bin = mod(key.hashCode(), this.hashTable.length);
         this.hashTable[bin].add(key, value);
-        this.size++;
-
-        //oak
+        this.size += 1;
 
     }
 
@@ -212,7 +209,7 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
         int bin = mod(key.hashCode(), this.hashTable.length);
-        this.size--;
+        this.size -= 1;
         return this.hashTable[bin].remove(key);
 
         //oak
@@ -222,19 +219,17 @@ public class Map4<K, V> extends MapSecondary<K, V> {
     public final Pair<K, V> removeAny() {
         assert this.size() > 0 : "Violation of: this /= empty_set";
 
-        Pair<K, V> value;
-        boolean valueFound = false;
         int bin = 0;
-
-        while (!valueFound && bin < this.hashTable.length) {
-            if (this.hashTable[bin].size() > 0) {
-                value = this.hashTable[bin].removeAny();
-                valueFound = true;
+        boolean binFound = false;
+        for (int x = 0; !binFound && 0 < this.hashTable.length; x++) {
+            if (this.hashTable[x].size() > 0) {
+                bin = x;
+                binFound = true;
             }
-            bin++;
         }
-
-        this.size--;
+        Pair<K, V> value = this.hashTable[bin].removeAny();
+        this.size -= 1;
+        // This line added just to make the component compilable.
         return value;
 
         //oak

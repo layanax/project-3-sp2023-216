@@ -124,7 +124,7 @@ public abstract class MapTest {
     @Test
     public void testRemoveToEmpty() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
-        Map<String, String> mExpected = this.createFromArgsTest("red", "one");
+        Map<String, String> mExpected = this.createFromArgsRef("red", "one");
 
         Pair<String, String> p = m.remove("red");
         Pair<String, String> pExpected = mExpected.remove("red");
@@ -133,4 +133,81 @@ public abstract class MapTest {
         assertEquals(mExpected, m);
     }
 
+    @Test
+    public void testSize1() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        int sizeExpected = 1;
+        int sizeM = m.size();
+        assertEquals(sizeM, sizeExpected);
+    }
+
+    @Test
+    public void testSize2() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        m.add("blue", "two");
+        m.add("green", "three");
+        m.removeAny();
+        m.add("yellow", "four");
+        m.remove("yellow");
+        int sizeExpected = 2;
+        int sizeOfM = m.size();
+        assertEquals(sizeOfM, sizeExpected);
+    }
+
+    @Test
+    public void testValue1() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        String value = m.value("red");
+        String expectedValue = "one";
+
+        assertEquals(value, expectedValue);
+    }
+
+    @Test
+    public void testValue2() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        m.add("blue", "two");
+        String value = m.value("blue");
+        String expectedValue = "two";
+
+        assertEquals(value, expectedValue);
+
+    }
+
+    @Test
+    public void testHasKey1() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        boolean hasKey = m.hasKey("red");
+        boolean hasKeyExpected = true;
+
+        assertEquals(hasKey, hasKeyExpected);
+    }
+
+    @Test
+    public void testHasKey2() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        m.add("blue", "two");
+        boolean hasKey = m.hasKey("yellow");
+        boolean hasKeyExpected = false;
+
+        assertEquals(hasKey, hasKeyExpected);
+    }
+
+    @Test
+    public void testHasKey3() {
+        Map<String, String> m = this.createFromArgsTest("red", "one");
+        m.add("blue", "two");
+        boolean hasKey = m.hasKey("blue");
+        boolean hasKeyExpected = true;
+
+        assertEquals(hasKey, hasKeyExpected);
+    }
+
+    @Test
+    public void testConstructor() {
+        Map<String, String> m = new Map4<String, String>();
+        Map<String, String> ref = this.createFromArgsRef();
+
+        assertEquals(m, ref);
+    }
 }
