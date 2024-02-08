@@ -93,7 +93,7 @@ public abstract class MapTest {
     @Test
     public void removeAnyTest() {
         Map<String, String> testMap = this.createFromArgsTest("one", "1");
-        Map<String, String> refMap = this.createFromArgsRef("one", "1");
+        Map<String, String> refMap = this.createFromArgsRef();
 
         Pair<String, String> removedPair = testMap.removeAny();
 
@@ -137,16 +137,9 @@ public abstract class MapTest {
      * key-value pairs.
      *
      */
-    @Test
-<<<<<<< HEAD
-    public void testRemoveToEmpty() {
-        Map<String, String> m = this.createFromArgsTest("red", "one");
-        Map<String, String> mExpected = this.createFromArgsRef("red", "one");
-=======
     public void removeToEmptyTest() {
         Map<String, String> testMap = this.createFromArgsTest("red", "one");
-        Map<String, String> refMap = this.createFromArgsRef("red", "one");
->>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-3-sp2023-216
+        Map<String, String> refMap = this.createFromArgsRef();
 
         Pair<String, String> p = testMap.remove("red");
         Pair<String, String> pExpected = refMap.remove("red");
@@ -155,7 +148,9 @@ public abstract class MapTest {
         assertEquals(refMap, testMap);
     }
 
-<<<<<<< HEAD
+    /**
+     * test the size of a map that hasn't had anything done to it.
+     */
     @Test
     public void testSize1() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -164,6 +159,9 @@ public abstract class MapTest {
         assertEquals(sizeM, sizeExpected);
     }
 
+    /**
+     * test the size of a map that has had stuff done to it.
+     */
     @Test
     public void testSize2() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -177,6 +175,9 @@ public abstract class MapTest {
         assertEquals(sizeOfM, sizeExpected);
     }
 
+    /**
+     * test the value finding function on a map with only one pair.
+     */
     @Test
     public void testValue1() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -186,6 +187,9 @@ public abstract class MapTest {
         assertEquals(value, expectedValue);
     }
 
+    /**
+     * test the value finding function on a map with more than one pair.
+     */
     @Test
     public void testValue2() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -197,6 +201,9 @@ public abstract class MapTest {
 
     }
 
+    /**
+     * test the has key method when the key is in the size of 1 map.
+     */
     @Test
     public void testHasKey1() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -206,6 +213,9 @@ public abstract class MapTest {
         assertEquals(hasKey, hasKeyExpected);
     }
 
+    /**
+     * test has key when the key is not in the size > 1 map.
+     */
     @Test
     public void testHasKey2() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -216,6 +226,9 @@ public abstract class MapTest {
         assertEquals(hasKey, hasKeyExpected);
     }
 
+    /**
+     * test hasKey when it is in the size > 1 map.
+     */
     @Test
     public void testHasKey3() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -226,13 +239,17 @@ public abstract class MapTest {
         assertEquals(hasKey, hasKeyExpected);
     }
 
+    /**
+     * Test the constructor for Map4.
+     */
     @Test
     public void testConstructor() {
         Map<String, String> m = new Map4<String, String>();
         Map<String, String> ref = this.createFromArgsRef();
 
         assertEquals(m, ref);
-=======
+    }
+
     /**
      * Test adding single key-value pair and checks if map equals reference map.
      */
@@ -303,6 +320,5 @@ public abstract class MapTest {
         testMap.removeAny();
 
         assertEquals(refMap, testMap);
->>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-3-sp2023-216
     }
 }
