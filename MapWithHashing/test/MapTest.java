@@ -86,16 +86,22 @@ public abstract class MapTest {
 
     // TODO - add test cases for constructor, add, remove, removeAny, value,
     // hasKey, and size
+    /**
+     * Test removing key-value pair and checks if key is removed from map.
+     */
     @Test
-    public void testRemoveAny() {
+    public void testRemoveAnyAndCheckRemovedKey() {
         Map<String, String> testMap = this.constructorTest();
         testMap.add("one", "1");
         assertNotNull(testMap.removeAny());
         assertFalse(testMap.hasKey("one"));
     }
 
+    /**
+     * Test adding key-value pair and checks if map equals reference map.
+     */
     @Test
-    public void testAdd() {
+    public void testAddAndCheckEquality() {
         Map<String, String> testMap = this.constructorTest();
         Map<String, String> refMap = this.constructorRef();
 
@@ -105,8 +111,12 @@ public abstract class MapTest {
         assertEquals(refMap, testMap);
     }
 
+    /**
+     * Test removing key-value pair and checks if map equals reference map.
+     *
+     */
     @Test
-    public void testRemove() {
+    public void testRemoveAndCheckEquality() {
         Map<String, String> testMap = this.constructorTest();
         Map<String, String> refMap = this.constructorRef();
 
@@ -121,8 +131,13 @@ public abstract class MapTest {
         assertEquals(refMap, testMap);
     }
 
+    /**
+     * Test removing key-value pair until map is empty and checks removed
+     * key-value pairs.
+     *
+     */
     @Test
-    public void testRemoveToEmpty() {
+    public void testRemoveToEmptyAndCheckKeyValuePairs() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
         Map<String, String> mExpected = this.createFromArgsTest("red", "one");
 
@@ -133,4 +148,64 @@ public abstract class MapTest {
         assertEquals(mExpected, m);
     }
 
+    /**
+     * Test adding single key-value pair and checks if map equals reference map.
+     */
+    @Test
+    public final void addOneKeyValuePair() {
+        Map<String, String> test = this.createFromArgsTest();
+        Map<String, String> expect = this.createFromArgsRef("1", "2");
+        test.add("1", "2");
+        assertEquals(expect, test);
+    }
+
+    /**
+     * Test adding multiple key-value pairs and checks if map equals reference
+     * map.
+     *
+     */
+    @Test
+    public final void addMultipleKeyValuePairs() {
+        Map<String, String> test = this.createFromArgsTest("1", "2");
+        Map<String, String> expect = this.createFromArgsRef("1", "2", "3", "4");
+        test.add("3", "4");
+        assertEquals(expect, test);
+    }
+
+    /**
+     * Test removing single key-value pair and checks if map equals reference
+     * map.
+     *
+     */
+    @Test
+    public final void removeKeyValuePair() {
+        Map<String, String> test = this.createFromArgsTest("1", "2");
+        Map<String, String> expect = this.createFromArgsRef();
+        test.remove("1");
+        assertEquals(expect, test);
+    }
+
+    /**
+     * Test removing multiple key-value pairs and checks if map equals reference
+     * map.
+     *
+     */
+    @Test
+    public final void removeMultipleKeyValuePairs() {
+        Map<String, String> test = this.createFromArgsTest("1", "2", "3", "4");
+        Map<String, String> expect = this.createFromArgsRef("3", "4");
+        test.remove("1");
+        assertEquals(expect, test);
+    }
+
+    /**
+     * Test removing key-value pair and checks if map equals reference map.
+     */
+    @Test
+    public final void removeAnyKeyValuePair() {
+        Map<String, String> test = this.createFromArgsTest("1", "2");
+        Map<String, String> expect = this.createFromArgsRef();
+        test.removeAny();
+        assertEquals(expect, test);
+    }
 }
