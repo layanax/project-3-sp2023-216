@@ -123,11 +123,9 @@ public abstract class MapTest {
     public void removeTest() {
         Map<String, String> testMap = this.createFromArgsTest("k1", "v1", "k2",
                 "v2");
-        Map<String, String> refMap = this.createFromArgsRef("k1", "v1", "k2",
-                "v2");
+        Map<String, String> refMap = this.createFromArgsRef("k2", "v2");
 
         testMap.remove("k1");
-        refMap.remove("k1");
 
         assertEquals(refMap, testMap);
     }
@@ -142,9 +140,9 @@ public abstract class MapTest {
         Map<String, String> refMap = this.createFromArgsRef();
 
         Pair<String, String> p = testMap.remove("red");
-        Pair<String, String> pExpected = refMap.remove("red");
 
-        assertEquals(pExpected, p);
+        assertEquals(p.key(), "red");
+        assertEquals(p.value(), "one");
         assertEquals(refMap, testMap);
     }
 
