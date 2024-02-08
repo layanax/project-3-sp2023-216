@@ -138,15 +138,9 @@ public abstract class MapTest {
      *
      */
     @Test
-<<<<<<< HEAD
-    public void testRemoveToEmpty() {
-        Map<String, String> m = this.createFromArgsTest("red", "one");
-        Map<String, String> mExpected = this.createFromArgsRef("red", "one");
-=======
     public void removeToEmptyTest() {
         Map<String, String> testMap = this.createFromArgsTest("red", "one");
         Map<String, String> refMap = this.createFromArgsRef("red", "one");
->>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-3-sp2023-216
 
         Pair<String, String> p = testMap.remove("red");
         Pair<String, String> pExpected = refMap.remove("red");
@@ -155,7 +149,6 @@ public abstract class MapTest {
         assertEquals(refMap, testMap);
     }
 
-<<<<<<< HEAD
     @Test
     public void testSize1() {
         Map<String, String> m = this.createFromArgsTest("red", "one");
@@ -232,7 +225,8 @@ public abstract class MapTest {
         Map<String, String> ref = this.createFromArgsRef();
 
         assertEquals(m, ref);
-=======
+    }
+
     /**
      * Test adding single key-value pair and checks if map equals reference map.
      */
@@ -303,6 +297,5 @@ public abstract class MapTest {
         testMap.removeAny();
 
         assertEquals(refMap, testMap);
->>>>>>> branch 'master' of https://github.com/OhioStateCSE2231/project-3-sp2023-216
     }
 }
