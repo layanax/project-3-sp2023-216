@@ -138,7 +138,7 @@ public abstract class MapTest {
     @Test
     public void removeToEmptyTest() {
         Map<String, String> testMap = this.createFromArgsTest("red", "one");
-        Map<String, String> refMap = this.createFromArgsRef("red", "one");
+        Map<String, String> refMap = this.createFromArgsRef();
 
         Pair<String, String> p = testMap.remove("red");
 
